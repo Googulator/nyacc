@@ -30,7 +30,19 @@
 	    tzort)
   #:use-module ((srfi srfi-43) #:select (vector-fold)))
 (cond-expand
-  (mes)
+  (mes
+   (define (string-every chr str)
+     (let loop ((k 0))
+       (if (>= k (string-length str))
+           #t
+           (if (char=? (string-ref str k) chr)
+               (loop (+ k 1))
+               #f))))
+
+   (define (vector-fold kons knil vec)
+     (let loop ((k 0) (acc knil))
+       (if (>= k (vector-length vec)) acc
+           (loop (+ k 1) (kons k acc (vector-ref vec k)))))))
   (guile-2)
   (guile
    (use-modules (ice-9 optargs))

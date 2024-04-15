@@ -36,7 +36,8 @@
   #:use-module ((srfi srfi-1) #:select (find fold fold-right))
   #:use-module (ice-9 pretty-print))
 (cond-expand
-  (mes)
+  (mes
+   (define F_OK 0))
   (guile-2)
   (guile-3)
   (guile
